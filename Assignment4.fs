@@ -1,10 +1,9 @@
 // T-501-FMAL, Spring 2021, Assignment 4
 
 (*
-STUDENT NAMES HERE:
-Bjarki Sn
-
-
+STUDENT NAMES HERE: 
+Bjarki Snær Magnússon - bjarkim19
+Guðjón Karl Ólafsson  - gudjono19
 *)
 
 module Assignment4
@@ -118,7 +117,7 @@ let memcpy =
       Assign (AccDeref (Access(AccVar "dest")), Access(AccDeref (Access (AccVar "src"))));
       Assign (AccVar "dest", Op ("+", Access (AccVar "dest"), Num 1));
       Assign (AccVar "src", Op ("+", Access (AccVar "src"), Num 1));
-      Assign (AccVar "length", Op ("-", Access (AccVar "length"), Num 1));
+      Assign (AccVar "length", Op ("-", Access (AccVar "length"), Num 1))
     ])
   ])
 
@@ -129,7 +128,7 @@ let memcpy =
 let make_copy =
   ("make_copy", ["dest_p"; "src"; "length"], [], Block [
     Alloc (AccDeref (Access (AccVar "dest_p")), Access (AccVar "length"));
-    Call ("memcpy", [Access (AccDeref (Access (AccVar "dest_p"))); Access(AccVar "src"); Access(AccVar "length")]);
+    Call ("memcpy", [Access (AccDeref (Access (AccVar "dest_p"))); Access(AccVar "src"); Access(AccVar "length")])
   ])
 
 
@@ -167,10 +166,9 @@ let array_to_list =
   void print_list(l){
     var tmp;
     tmp = l;
-    while i > 0 {
+    while tmp {
       print(tmp);
       tmp = *(tmp + 1);
-      i--;
     }
   }
 *)
@@ -179,7 +177,7 @@ let print_list =
     Assign (AccVar "tmp", Access (AccVar "l"));
     While (Access (AccVar "tmp"), Block [
         Print(Access (AccDeref ( Access ((AccVar "tmp")))));
-        Assign (AccVar "tmp", Access (AccDeref (Op ("+", Access (AccVar "tmp"), Num 1))));
+        Assign (AccVar "tmp", Access (AccDeref (Op ("+", Access (AccVar "tmp"), Num 1))))
     ]) 
   ])
 
@@ -281,7 +279,7 @@ and exec stm (locEnv : locEnv) (funEnv : funEnv) (sto : store) : store =
         let res = eval e locEnv funEnv sto
         setSto sto loc res
 
-    | TestAndSet (p, q) -> // failwith "hoho"
+    | TestAndSet (p, q) ->
           let p_address = eval p locEnv funEnv sto
           let q_address = eval q locEnv funEnv sto
           let sto' = setSto sto q_address 1
@@ -373,5 +371,3 @@ let prog5ii =
         Print (Access (AccVar "a"))
       ])
     ])
-
-
