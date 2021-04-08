@@ -284,7 +284,11 @@ and exec stm (locEnv : locEnv) (funEnv : funEnv) (sto : store) : store =
         let res = eval e locEnv funEnv sto
         setSto sto loc res
     | TestAndSet (p, q) -> failwith "hoho"
-        // let tmp = access q
+        (*
+          let tmp1 = eval p [] [] emptyStore
+          let tmp2 = eval q [] [] emptyStore
+          
+        *)
     | Alloc (acc, e) ->
         let loc = access acc locEnv funEnv sto
         let n = eval e locEnv funEnv sto
@@ -315,7 +319,10 @@ let run (Prog topdecs) vs =
 // Problem 5
 
 (* ANSWER 5 HERE
-    (i) This prints 10 because ...
+    (i) This prints 10 because the allocated space was used to allocate space for p since both
+    p and q were defined as variables at the same time their address space is the same and so
+    when space is allocated for p it uses the same address space as q.
+    
    (ii) This prints 0 because ...
 *)
 
