@@ -52,7 +52,7 @@ let make_copy_test =
     Call ("print_array", [Access (AccVar "q"); Num 10])
   ]);;
 
-// > run (Prog [make_range; print_array; print_array_test]) [] |> ignore;;
+> run (Prog [make_range; print_array; print_array_test]) [] |> ignore;;
 // 5 6 7 8 9 10 11 12 13 14 val it : unit = ()
 // > run (Prog [make_range; print_array; print_array_test2]) [] |> ignore;;
 // 5 6 7 8 9 10 val it : unit = ()

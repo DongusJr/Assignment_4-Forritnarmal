@@ -12,12 +12,15 @@ module Assignment4
 
 (*
 ANSWER 1 HERE:
-    (i) g(1, 2) prints ..., h(1, 2) prints ...
+    (i) g(1, 2) prints 2, h(1, 2) prints 2
 
-   (ii) g(1, 0) prints ..., h(1, 0) prints ...
+   (ii) g(1, 0) prints 0, h(1, 0) prints 0
 
-  (iii) g(0, 0) prints ..., h(0, 0) prints ...
-        ...
+  (iii) g(0, 0) prints 0, h(0, 0) prints 50
+        The line
+        "p = f(p, &y);"
+        returns the pointer u, which is pointer to y. Meaning p and y point to the same address in
+        memory. Since p is now 50, y points to 50.
 *)
 
 
