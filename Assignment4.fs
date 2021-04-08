@@ -99,7 +99,7 @@ let print_array =
   ("print_array", ["a"; "length"], ["i"], Block [
     While (Op ("<", Access (AccVar "i"), Access (AccVar "length")), Block [
       Print (Access (AccDeref (Op ("+", Access (AccVar "a"), Access (AccVar "i")))));
-      Assign (AccVar "i", Op ("+", Access (AccVar "i"), Num 1));
+      Assign (AccVar "i", Op ("+", Access (AccVar "i"), Num 1))
     ])
   ])
 
@@ -127,7 +127,8 @@ let memcpy =
 // }
 let make_copy =
   ("make_copy", ["dest_p"; "src"; "length"], [], Block [
-    Alloc ()
+    Alloc (AccDeref (Access (AccVar "dest_p")), Access (AccVar "length"));
+    Call ("memcpy", [Access (AccDeref (Access (AccVar "dest_p"))); Access(AccVar "src"); Access(AccVar "length")]);
   ])
 
 
@@ -136,8 +137,16 @@ let make_copy =
 
 // (i)
 // void array_to_list(dest_p, a, length) {
-//   var cur;
-//   COMPLETE THIS
+(*  var cur;
+    *dest_p = 0;
+    while length{
+      length = length - 1;
+      cur = alloc(2);
+      *cur = *(a+length);
+      *(cur+1) = *dest_p;
+      *dest_p = cur;
+}
+*)
 // }
 let array_to_list =
   ("array_to_list", ["dest_p"; "a"; "length"], ["cur"], Block [
@@ -152,11 +161,28 @@ let array_to_list =
   ])
 
 // (ii)
+
+(*
+  void print_list(l){
+    var tmp;
+    var i;
+    i = 3;
+    tmp = l;
+    while i > 0 {
+      print(tmp);
+      tmp = *(tmp + 1);
+      i--;
+    }
+
+  }
+*)
 let print_list =
-  ("print_list", ["l"], [], Block [
-    // COMPLETE THIS
-    // (You may want to add local variables by changing the empty list
-    // above.)
+  ("print_list", ["l"], ["tmp"; "i"], Block [
+    Assign (AccVar "tmp", Access (AccVar "l"));
+    While (Access (AccVar "tmp"), Block [
+        Print(Access (AccDeref ( Access ((AccVar "tmp")))));
+        Assign (AccVar "tmp", Access (AccDeref (Op ("+", Access (AccVar "tmp"), Num 1))));
+    ]) 
   ])
 
 
@@ -257,8 +283,8 @@ and exec stm (locEnv : locEnv) (funEnv : funEnv) (sto : store) : store =
         let loc = access acc locEnv funEnv sto
         let res = eval e locEnv funEnv sto
         setSto sto loc res
-    | TestAndSet (p, q) ->
-        failwith "not implemented"
+    | TestAndSet (p, q) -> failwith "hoho"
+        // let tmp = access q
     | Alloc (acc, e) ->
         let loc = access acc locEnv funEnv sto
         let n = eval e locEnv funEnv sto
