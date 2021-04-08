@@ -97,7 +97,10 @@ let make_range =
 // }
 let print_array =
   ("print_array", ["a"; "length"], ["i"], Block [
-    // COMPLETE THIS
+    While (Op ("<", Access (AccVar "i"), Access (AccVar "length")), Block [
+      Print (Access (AccDeref (Op ("+", Access (AccVar "a"), Access (AccVar "i")))));
+      Assign (AccVar "i", Op ("+", Access (AccVar "i"), Num 1));
+    ])
   ])
 
 // void memcpy(dest, src, length) {
@@ -110,7 +113,9 @@ let print_array =
 // }
 let memcpy =
   ("memcpy", ["dest"; "src"; "length"], [], Block [
-    // COMPLETE THIS
+    While (Op ("!=", Access (AccVar), Num 0), Block [
+      Assign (AccDeref())
+    ])
   ])
 
 // void make_copy(dest_p, src, length) {
