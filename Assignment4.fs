@@ -127,7 +127,7 @@ let memcpy =
 // }
 let make_copy =
   ("make_copy", ["dest_p"; "src"; "length"], [], Block [
-    // COMPLETE THIS
+    Alloc ()
   ])
 
 
