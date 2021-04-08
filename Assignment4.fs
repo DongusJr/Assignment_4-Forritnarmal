@@ -1,7 +1,8 @@
 // T-501-FMAL, Spring 2021, Assignment 4
 
 (*
-STUDENT NAMES HERE: ...
+STUDENT NAMES HERE:
+Bjarki Sn
 
 
 *)
