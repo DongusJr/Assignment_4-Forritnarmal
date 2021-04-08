@@ -175,7 +175,7 @@ let array_to_list =
   }
 *)
 let print_list =
-  ("print_list", ["l"], ["tmp"; "i"], Block [
+  ("print_list", ["l"], ["tmp"], Block [
     Assign (AccVar "tmp", Access (AccVar "l"));
     While (Access (AccVar "tmp"), Block [
         Print(Access (AccDeref ( Access ((AccVar "tmp")))));
@@ -281,8 +281,7 @@ and exec stm (locEnv : locEnv) (funEnv : funEnv) (sto : store) : store =
         let loc = access acc locEnv funEnv sto
         let res = eval e locEnv funEnv sto
         setSto sto loc res
-    | TestAndSet (p, q) -> failwith "hoho"
-        // let tmp = access q
+    | TestAndSet (p, q) ->
     | Alloc (acc, e) ->
         let loc = access acc locEnv funEnv sto
         let n = eval e locEnv funEnv sto
