@@ -207,15 +207,15 @@ let test_and_set_test5 =
     Call ("print_array", [Access (AccVar "a"); Num 11])
   ]);;
 
-> run (Prog [test_and_set_test]) [] |> ignore;;
+run (Prog [test_and_set_test]) [] |> ignore;;
 // 1 5 val it : unit = ()
-// > run (Prog [test_and_set_test2]) [] |> ignore;;
+run (Prog [test_and_set_test2]) [] |> ignore;;
 // 4 1 val it : unit = ()
-// > run (Prog [make_range; print_array; test_and_set_test3]) [] |> ignore;;
+run (Prog [make_range; print_array; test_and_set_test3]) [] |> ignore;;
 // 105 106 107 108 109 110 111 112 113 114 115 1 1 1 1 1 1 1 1 1 1 1 val it : unit = ()
-// > run (Prog [make_range; print_array; test_and_set_test4]) [] |> ignore;;
+run (Prog [make_range; print_array; test_and_set_test4]) [] |> ignore;;
 // 56 1 58 1 60 1 62 1 64 1 65 val it : unit = ()
-// > run (Prog [make_range; print_array; test_and_set_test5]) [] |> ignore;;
+run (Prog [make_range; print_array; test_and_set_test5]) [] |> ignore;;
 // 56 57 58 59 60 61 62 63 64 65 1 val it : unit = ()
 
 

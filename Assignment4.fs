@@ -171,7 +171,6 @@ let array_to_list =
       tmp = *(tmp + 1);
       i--;
     }
-
   }
 *)
 let print_list =
@@ -182,7 +181,6 @@ let print_list =
         Assign (AccVar "tmp", Access (AccDeref (Op ("+", Access (AccVar "tmp"), Num 1))));
     ]) 
   ])
-
 
 
 // Various definitions used in the interpreter
@@ -283,8 +281,10 @@ and exec stm (locEnv : locEnv) (funEnv : funEnv) (sto : store) : store =
         setSto sto loc res
 
     | TestAndSet (p, q) -> // failwith "hoho"
-          let tmp = getSto sto p
-          sto
+          let p_address = eval p locEnv funEnv sto
+          let q_address = eval q locEnv funEnv sto
+          let sto' = setSto sto q_address 1
+          setSto sto' p_address (getSto sto q_address)
     | Alloc (acc, e) ->
         let loc = access acc locEnv funEnv sto
         let n = eval e locEnv funEnv sto
@@ -315,11 +315,17 @@ let run (Prog topdecs) vs =
 // Problem 5
 
 (* ANSWER 5 HERE
-    (i) This prints 10 because the memory block allocated by q is adjacent to p and therefore the pointer of q-1 points
-    at the memory of p which is 10.
+    (i) This prints 10
+    because the memory block allocated by q is adjacent to p and therefore the pointer of q-1 points
+    at the memory of p which is 10(This is applicable in this project, but might not be in other imperative languagues).
 
-   (ii) This prints 0 because the memory block allocated by variable a contains the value 1234 and when we search when the pointer
-   i has the contents of 1234 then the memory which a points at is changed to 0 and therefore we get 0
+   (ii) This prints 0
+   When we run the program, we first load funcion f, which loads in variable i at a certain location in memory
+   Next we load in main, which loads in variables a, b, c ,d next to i in memory.
+   We set a = 1234 and run f.
+   The while loop in f stops when i = 1, because *(&i + i) derefrences variable a, whichs stores 1234.
+   End of the function sets a = 0.
+   So when we print in a in main, we get 0
 *)
 
 // void main() {
