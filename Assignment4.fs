@@ -99,11 +99,7 @@ let print_array =
   ("print_array", ["a"; "length"], ["i"], Block [
     While (Op ("<", Access (AccVar "i"), Access (AccVar "length")), Block [
       Print (Access (AccDeref (Op ("+", Access (AccVar "a"), Access (AccVar "i")))));
-<<<<<<< HEAD
       Assign (AccVar "i", Op ("+", Access (AccVar "i"), Num 1))
-=======
-      Assign (AccVar "i", Op ("+", Access (AccVar "i"), Num 1));
->>>>>>> c9d0b3978c9e84bbb8c8f92448de43791a018d9d
     ])
   ])
 
@@ -128,7 +124,6 @@ let memcpy =
 // }
 let make_copy =
   ("make_copy", ["dest_p"; "src"; "length"], [], Block [
-    // COMPLETE THIS
   ])
 
 
@@ -137,8 +132,16 @@ let make_copy =
 
 // (i)
 // void array_to_list(dest_p, a, length) {
-//   var cur;
-//   COMPLETE THIS
+(*  var cur;
+    *dest_p = 0;
+    while length{
+      length = length - 1;
+      cur = alloc(2);
+      *cur = *(a+length);
+      *(cur+1) = *dest_p;
+      *dest_p = cur;
+}
+*)
 // }
 let array_to_list =
   ("array_to_list", ["dest_p"; "a"; "length"], ["cur"], Block [
