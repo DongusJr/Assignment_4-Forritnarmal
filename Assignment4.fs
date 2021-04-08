@@ -317,11 +317,11 @@ let run (Prog topdecs) vs =
 // Problem 5
 
 (* ANSWER 5 HERE
-    (i) This prints 10 because the allocated space was used to allocate space for p since both
-    p and q were defined as variables at the same time their address space is the same and so
-    when space is allocated for p it uses the same address space as q.
-    
-   (ii) This prints 0 because ...
+    (i) This prints 10 because the memory block allocated by q is adjacent to p and therefore the pointer of q-1 points
+    at the memory of p which is 10.
+
+   (ii) This prints 0 because the memory block allocated by variable a contains the value 1234 and when we search when the pointer
+   i has the contents of 1234 then the memory which a points at is changed to 0 and therefore we get 0
 *)
 
 // void main() {
