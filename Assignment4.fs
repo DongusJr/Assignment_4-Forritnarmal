@@ -165,8 +165,6 @@ let array_to_list =
 (*
   void print_list(l){
     var tmp;
-    var i;
-    i = 3;
     tmp = l;
     while i > 0 {
       print(tmp);
