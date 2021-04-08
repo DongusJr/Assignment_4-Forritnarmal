@@ -12,12 +12,15 @@ module Assignment4
 
 (*
 ANSWER 1 HERE:
-    (i) g(1, 2) prints ..., h(1, 2) prints ...
+    (i) g(1, 2) prints 2, h(1, 2) prints 2
 
-   (ii) g(1, 0) prints ..., h(1, 0) prints ...
+   (ii) g(1, 0) prints 0, h(1, 0) prints 0
 
-  (iii) g(0, 0) prints ..., h(0, 0) prints ...
-        ...
+  (iii) g(0, 0) prints 0, h(0, 0) prints 50
+        The line
+        "p = f(p, &y);"
+        returns the pointer u, which is pointer to y. Meaning p and y point to the same address in
+        memory. Since p is now 50, y points to 50.
 *)
 
 
@@ -96,7 +99,11 @@ let print_array =
   ("print_array", ["a"; "length"], ["i"], Block [
     While (Op ("<", Access (AccVar "i"), Access (AccVar "length")), Block [
       Print (Access (AccDeref (Op ("+", Access (AccVar "a"), Access (AccVar "i")))));
+<<<<<<< HEAD
       Assign (AccVar "i", Op ("+", Access (AccVar "i"), Num 1))
+=======
+      Assign (AccVar "i", Op ("+", Access (AccVar "i"), Num 1));
+>>>>>>> c9d0b3978c9e84bbb8c8f92448de43791a018d9d
     ])
   ])
 
@@ -110,7 +117,9 @@ let print_array =
 // }
 let memcpy =
   ("memcpy", ["dest"; "src"; "length"], [], Block [
-    // COMPLETE THIS
+    While (Op ("!=", Access (AccVar), Num 0), Block [
+      Assign (AccDeref())
+    ])
   ])
 
 // void make_copy(dest_p, src, length) {
